@@ -47,15 +47,16 @@ Go willy-nilly and add console.log statements in
  container.insertBefore(newDiv, h1); */
 
 
-let container = document.getElementsByClassName('container');
+let container = document.getElementById('container');
 
  for(i=0; i <256; i++){
     let newDiv = document.createElement('div');
     newDiv.className= "div" + i;
-    container[0].appendChild(newDiv);
+    container.appendChild(newDiv);
   newDiv.style.border = "1px solid black";
-  newDiv.style.width= "25px";
-  newDiv.style.height="25px";
+ newDiv.style.height='25px';
+ newDiv.style.width='25px';
+  
   
  newDiv.addEventListener("mouseover", function (e) {
       newDiv.className ="h";}, false)
@@ -63,15 +64,75 @@ let container = document.getElementsByClassName('container');
   
  };
  let size =0;
-
- const adjust=document.getElementById('adjust');
- adjust.addEventListener('click', function(){
-      size = prompt('Select length and height of grid')});
+ let newHeightWidth=0;
+ let newDivAmount=0;
 
  
+ const adjust=document.getElementById('adjust');
+ adjust.addEventListener('click', function(){
+      size = prompt('Select length and height of grid')
+      document.getElementById('container').innerHTML = "";
+      newHeightWidth= 432 / size - 2;
+     newDivAmount= size * size;
+     
+ 
+     
+        for(j=0;j<newDivAmount; j++){
+            let newDiv = document.createElement('div');
+            newDiv.style.height=newHeightWidth+'px';
+  newDiv.style.width=newHeightWidth+'px';
+  newDiv.style.border = "1px solid black";
+    newDiv.className= "div" + j;
+    container.appendChild(newDiv);
+    
+    newDiv.addEventListener("mouseover", function (e) {
+      newDiv.className ="h";}, false)
+ 
+        } 
+    
+
+
+    
+    });
+
+    /* having issue with container class vs id and getting it to work*/
+
+    /* function newContainer(){
+        for(j=0;j<newDivAmount; j++){
+            let newDiv = document.createElement('div');
+    newDiv.className= "div" + i;
+    container[0].appendChild(newDiv);
+  newDiv.style.border = "1px solid black";
+  newDiv.style.height=newHeightWidth+'px';
+  newDiv.style.width=newHeightWidth+'px';
+
+ newDiv.addEventListener("mouseover", function (e) {
+    newDiv.className ="h";}, false)
+
+
+        } 
+
+
+    }*/
+
+ 
+/*  
+
+for prompt = 8  432/8  == 54 px height/ width
+for prompt = 100  432/100 = 4.32 px height/width 
+
+
+
+*/
+
+
 
  //add a button that resets grid and then allows grid to be same total width but 
  //flex calculator ?
+
+
+ // should be away to take a prompt and multiply/divide to fit it into correct 
+ // layout .. css grid might be needed
  
 // still need to make this grid 16 by 16 but
 //want to be able to have a hover or click option to change colors of div
